@@ -23,6 +23,8 @@
     title: Quiz 2 - MCP SDK
   - local: unit1/mcp-clients
     title: MCP Clients
+  - local: unit1/hf-mcp-server
+    title: Hugging Face MCP Server
   - local: unit1/gradio-mcp
     title: Gradio MCP Integration
   - local: unit1/unit1-recap
@@ -44,6 +46,8 @@
     title: Building an MCP Client with Gradio
   - local: unit2/tiny-agents
     title: Building Tiny Agents with MCP and the Hugging Face Hub
+  - local: unit2/lemonade-server
+    title: Local Tiny Agents with AMD NPU and iGPU Acceleration
 
 - title: "3. Advanced MCP Development: Custom Workflow Servers"
   sections:

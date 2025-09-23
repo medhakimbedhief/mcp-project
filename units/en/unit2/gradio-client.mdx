@@ -20,7 +20,7 @@ Let's connect to an example MCP Server that is already running on Hugging Face. 
 from smolagents.mcp_client import MCPClient
 
 with MCPClient(
-    {"url": "https://abidlabs-mcp-tool-http.hf.space/gradio_api/mcp/sse", "transport": "sse"}
+    {"url": "https://abidlabs-mcp-tool-http.hf.space/gradio_api/mcp/sse", "transport": "sse",}
 ) as tools:
     # Tools from the remote server are available
     print("\n".join(f"{t.name}: {t.description}" for t in tools))
@@ -64,7 +64,7 @@ Next, we'll connect to the MCP Server and get the tools that we can use to answe
 
 ```python
 mcp_client = MCPClient(
-    {"url": "https://abidlabs-mcp-tool-http.hf.space/gradio_api/mcp/sse"} # This is the MCP Client we created in the previous section
+    {"url": "https://abidlabs-mcp-tool-http.hf.space/gradio_api/mcp/sse", "transport": "sse",} # This is the MCP Client we created in the previous section
 )
 tools = mcp_client.get_tools()
 ```
@@ -115,7 +115,7 @@ from smolagents import InferenceClientModel, CodeAgent, MCPClient
 
 try:
     mcp_client = MCPClient(
-        {"url": "https://abidlabs-mcp-tool-http.hf.space/gradio_api/mcp/sse"}
+        {"url": "https://abidlabs-mcp-tool-http.hf.space/gradio_api/mcp/sse", "transport": "sse",}
     )
     tools = mcp_client.get_tools()
 
@@ -152,7 +152,7 @@ To deploy your Gradio MCP client to Hugging Face Spaces:
 
 ```python
 mcp_client = MCPClient(
-    {"url": "https://abidlabs-mcp-tool-http.hf.space/gradio_api/mcp/sse"}
+    {"url": "https://abidlabs-mcp-tool-http.hf.space/gradio_api/mcp/sse", "transport": "sse"}
 )
 ```
 
