@@ -9,7 +9,7 @@ In this section, you will:
 * Understand what MCP Clients are and their role in the MCP architecture
 * Learn about the key responsibilities of MCP Clients
 * Explore the major MCP Client implementations
-* Discover how to use Hugging Face's MCP Client implementation
+* Discover how to connect to the Hugging Face MCP Server and built-in tools
 * See practical examples of MCP Client usage
 
 <Tip>
@@ -30,13 +30,26 @@ Let's start by exploring the user interface clients that are available for the M
 
 ### Chat Interface Clients
 
-Anthropic's Claude Desktop stands as one of the most prominent MCP Clients, providing integration with various MCP Servers.
+- Claude Desktop (Anthropic)
 
 ### Interactive Development Clients
 
-Cursor's MCP Client implementation enables AI-powered coding assistance through direct integration with code editing capabilities. It supports multiple MCP Server connections and provides real-time tool invocation during coding, making it a powerful tool for developers.
+- VS Code extensions with MCP (e.g., Continue)
+- Cursor IDE (built-in MCP client)
+- Zed editor
 
-Continue.dev is another example of an interactive development client that supports MCP and connects to an MCP server from VS Code.
+These clients support connecting to multiple MCP servers and real-time tool invocation.
+
+## Quick connect to Hugging Face MCP Server
+
+Hugging Face provides a hosted MCP server with built-in tools for exploring models, datasets, Spaces, and papers.
+
+1. Visit https://huggingface.co/settings/mcp while logged in.
+2. Select your MCP-compatible client (e.g., VS Code, Cursor, Zed, Claude Desktop).
+3. Copy the generated configuration snippet into your client's MCP config.
+4. Restart or reload your client. You should see “Hugging Face” connected.
+
+Tip: Prefer the generated snippet over hand-written config; it’s tailored per client.
 
 ## Configuring MCP Clients
 
@@ -267,15 +280,15 @@ Now, let's create an agent configuration file `agent.json`.
 
 ```json
 {
+    "name": "playwright-agent",
+    "description": "Agent with Playwright MCP server",
     "model": "Qwen/Qwen2.5-72B-Instruct",
     "provider": "nebius",
     "servers": [
         {
             "type": "stdio",
-            "config": {
-                "command": "npx",
-                "args": ["@playwright/mcp@latest"]
-            }
+              "command": "npx",
+              "args": ["@playwright/mcp@latest"]
         }
     ]
 }
@@ -310,17 +323,15 @@ Create an agent configuration file at `my-agent/agent.json`:
 
 ```json
 {
-	"model": "Qwen/Qwen2.5-72B-Instruct",
-	"provider": "nebius",
-	"servers": [
-		{
-			"type": "stdio",
-			"config": {
-				"command": "npx",
-				"args": ["@playwright/mcp@latest"]
-			}
-		}
-	]
+    "model": "Qwen/Qwen2.5-72B-Instruct",
+    "provider": "nebius",
+    "servers": [
+        {
+            "type": "stdio",
+            "command": "npx",
+            "args": ["@playwright/mcp@latest"]
+        }
+    ]
 }
 ```
 
