@@ -65,7 +65,7 @@ Lemonade Server supports CPU inference across all platforms and engines on Windo
 
 ### Tiny Agents and NPX Setup
 
-This section of the course assumes you have already installed `npx` and `Tiny Agents`. If you haven't, please refer to the [Tiny Agents](https://huggingface.co/learn/mcp-course/en/unit2/tiny-agents) section of the course.
+This section of the course assumes you have already installed `npx` and `Tiny Agents`. If you haven't, please refer to the [Tiny Agents](https://huggingface.co/learn/mcp-course/en/unit2/tiny-agents) section of the course. Please make sure to use `huggingface_hub[mcp]==0.33.2`.
 
 ## Running your Tiny Agents application with AMD NPU and iGPU
 
@@ -81,13 +81,11 @@ To run your Tiny Agents application with AMD NPU and iGPU, simply point to the M
   "servers": [
     {
       "type": "stdio",
-      "config": {
-        "command": "C:\\Program Files\\nodejs\\npx.cmd",
-        "args": [
-          "mcp-remote",
-          "http://localhost:7860/gradio_api/mcp/sse"
-        ]
-      }
+      "command": "C:\\Program Files\\nodejs\\npx.cmd",
+      "args": [
+        "mcp-remote",
+        "http://localhost:7860/gradio_api/mcp/sse"
+      ]
     }
   ]
 }
@@ -103,13 +101,11 @@ To run your Tiny Agents application with AMD NPU and iGPU, simply point to the M
   "servers": [
     {
       "type": "stdio",
-      "config": {
-        "command": "npx",
-        "args": [
-          "mcp-remote",
-          "http://localhost:7860/gradio_api/mcp/sse"
-        ]
-      }
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "http://localhost:7860/gradio_api/mcp/sse"
+      ]
     }
   ]
 }
@@ -126,7 +122,7 @@ You can then choose from a variety of models to run on your local machine. For t
 
 Now let's enhance our end-to-end application by enabling access to local files and introducing an assistant that processes sensitive information entirely on-device. Specifically, this assistant will help us evaluate candidate resumes and support decision-making in the hiring process—all while keeping the data private and secure.
 
-To do this, we'll use the [Desktop Commander](https://github.com/wonderwhy-er/desktop-commander) MCP server, which allows you to run commands on your local machine and provides comprehensive file system access, terminal control, and code editing capabilities.
+To do this, we'll use the [Desktop Commander](https://github.com/wonderwhy-er/DesktopCommanderMCP) MCP server, which allows you to run commands on your local machine and provides comprehensive file system access, terminal control, and code editing capabilities.
 
 Let's setup a project with a basic Tiny Agent.
 
@@ -147,13 +143,11 @@ Let's then create a new `agent.json` file in the `file-assistant` folder.
   "servers": [
     {
       "type": "stdio",
-      "config": {
-        "command": "C:\\Program Files\\nodejs\\npx.cmd",
-        "args": [
-          "-y",
-          "@wonderwhy-er/desktop-commander"
-        ]
-      }
+      "command": "C:\\Program Files\\nodejs\\npx.cmd",
+      "args": [
+        "-y",
+        "@wonderwhy-er/desktop-commander"
+      ]
     }
   ]
 }
@@ -169,13 +163,11 @@ Let's then create a new `agent.json` file in the `file-assistant` folder.
   "servers": [
     {
       "type": "stdio",
-      "config": {
-        "command": "npx",
-        "args": [
-          "-y",
-          "@wonderwhy-er/desktop-commander"
-        ]
-      }
+      "command": "npx",
+      "args": [
+        "-y",
+        "@wonderwhy-er/desktop-commander"
+      ]
     }
   ]
 }
@@ -338,7 +330,7 @@ Now let's provide the asistant with some info to get started.
 » Read the contents of C:\Users\your_username\file-assistant\job_description.md
 ```
 
-You should see the an output similar to the following:
+You should see an output similar to the following:
 
 ```
 <Tool iNtxGmOuXHqZVBWmKnfxsc61xsJbsoAM>read_file {"path":"C:\\Users\\your_username\\file-assistant\\job_description.md","length":23}
