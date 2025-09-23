@@ -261,7 +261,11 @@ huggingface-cli login
 
 After creating your Hugging Face access token and logging in, you need to ensure your token has the proper permissions to work with inference providers.
 
+<Tip warning={true}>
+
 **Important:** If you skip this step, you may encounter authentication errors when running tiny agents with hosted models.
+
+</Tip>
 
 1. Go to your [Hugging Face Access Tokens page](https://huggingface.co/settings/tokens)
 2. Find your MCP token and click the three dots (⋮) next to it
