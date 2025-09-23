@@ -114,6 +114,16 @@ When you set `mcp_server=True` in `launch()`, several things happen:
 
 4. **Hosted MCP Servers on 🤗 Spaces**: You can publish your Gradio application for free on Hugging Face Spaces, which will allow you to have a free hosted MCP server. Here's an example of such a Space: https://huggingface.co/spaces/abidlabs/mcp-tools
 
+## Use MCP-compatible Spaces from your client
+
+You can connect any MCP-compatible Space to your assistant via Hugging Face MCP settings:
+
+1. Explore MCP-compatible Spaces: https://huggingface.co/spaces?search=mcp
+2. Open https://huggingface.co/settings/mcp (logged in) and add the Space.
+3. Restart or refresh your MCP client so it discovers the new tools.
+
+These Spaces expose their functions as tools with arguments and descriptions, so your assistant can call them directly.
+
 ## Troubleshooting Tips
 
 1. **Type Hints and Docstrings**: Ensure you provide type hints and valid docstrings for your functions. The docstring should include an "Args:" block with indented parameter names.
