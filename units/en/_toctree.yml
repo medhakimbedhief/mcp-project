@@ -23,6 +23,8 @@
     title: Quiz 2 - MCP SDK
   - local: unit1/mcp-clients
     title: MCP Clients
+  - local: unit1/hf-mcp-server
+    title: Hugging Face MCP Server
   - local: unit1/gradio-mcp
     title: Gradio MCP Integration
   - local: unit1/unit1-recap
