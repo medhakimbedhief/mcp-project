@@ -4,11 +4,8 @@ Now that we have our MCP server with tagging tools, we need to create a client t
 
 For the sake of this project, we'll build both an API and a Gradio app. The API will be used to test the MCP server and the webhook listener, and the Gradio app will be used to test the MCP client with simulated webhook events.
 
-<Tip>
-
-For educational purposes, we will build the MCP Server and MCP Client in the same repo. In a real-world application, you would likely have a separate repo for the MCP Server and MCP Client. In fact, you might only build one of these components.
-
-</Tip>
+> [!TIP]
+> For educational purposes, we will build the MCP Server and MCP Client in the same repo. In a real-world application, you would likely have a separate repo for the MCP Server and MCP Client. In fact, you might only build one of these components.
 
 ## Understanding the MCP Client Architecture
 
@@ -95,11 +92,8 @@ This is where the important part happens! Let's break down the Agent configurati
 - `args: ["mcp_server.py"]`: The script file to execute
 - `env`: Pass the HF_TOKEN to the server process
 
-<Tip>
-
-The `stdio` connection type means the agent starts your MCP server as a subprocess and communicates with it through standard input/output. This is perfect for development and single-machine deployments.
-
-</Tip>
+> [!TIP]
+> The `stdio` connection type means the agent starts your MCP server as a subprocess and communicates with it through standard input/output. This is perfect for development and single-machine deployments.
 
 The `load_tools()` call is crucial - it discovers what tools are available from the MCP server and makes them accessible to the agent's reasoning engine.
 
@@ -173,11 +167,8 @@ async def process_webhook_comment(webhook_data: Dict[str, Any]):
 
 This first part extracts and combines tags from both the comment content and discussion title. We use a set to deduplicate any tags that appear in both places.
 
-<Tip>
-
-Processing both the comment and discussion title increases our chances of catching relevant tags. Users might mention tags in the title like "Missing pytorch tag" or in comments like "This needs #transformers".
-
-</Tip>
+> [!TIP]
+> Processing both the comment and discussion title increases our chances of catching relevant tags. Users might mention tags in the title like "Missing pytorch tag" or in comments like "This needs #transformers".
 
 Next, we get our agent and process each tag:
 
@@ -344,11 +335,8 @@ async def webhook_handler(request: Request, background_tasks: BackgroundTasks):
 
 This pattern ensures webhook responses are fast (under 1 second) while allowing complex tag processing to happen in the background.
 
-<Tip>
-
-Webhook endpoints should respond within 10 seconds or the platform may consider them timed out. Using background tasks ensures you can always respond quickly while handling complex processing asynchronously.
-
-</Tip>
+> [!TIP]
+> Webhook endpoints should respond within 10 seconds or the platform may consider them timed out. Using background tasks ensures you can always respond quickly while handling complex processing asynchronously.
 
 ## Next Steps
 
@@ -361,8 +349,5 @@ With our MCP client implemented, we can now:
 
 In the next section, we'll implement the webhook listener that will trigger our MCP-powered tagging agent.
 
-<Tip>
-
-The Agent class from `huggingface_hub` provides both MCP tool integration and language model reasoning, making it perfect for building intelligent automation workflows like our PR agent.
-
-</Tip> 
+> [!TIP]
+> The Agent class from `huggingface_hub` provides both MCP tool integration and language model reasoning, making it perfect for building intelligent automation workflows like our PR agent. 

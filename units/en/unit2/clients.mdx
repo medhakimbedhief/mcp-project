@@ -32,11 +32,8 @@ The standard configuration file for MCP is named `mcp.json`. Here's the basic st
 
 In this example, we have a single server configured to use SSE transport, connecting to a local Gradio server running on port 7860.
 
-<Tip>
-
-We've connected to the Gradio app via SSE transport because we assume that the gradio app is running on a remote server. However, if you want to connect to a local script, `stdio` transport instead of `sse` transport is a better option.
-
-</Tip>
+> [!TIP]
+> We've connected to the Gradio app via SSE transport because we assume that the gradio app is running on a remote server. However, if you want to connect to a local script, `stdio` transport instead of `sse` transport is a better option.
 
 #### Configuration for HTTP+SSE Transport
 

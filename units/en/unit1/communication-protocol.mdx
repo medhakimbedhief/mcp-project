@@ -2,11 +2,8 @@
 
 MCP defines a standardized communication protocol that enables Clients and Servers to exchange messages in a consistent, predictable way. This standardization is critical for interoperability across the community. In this section, we'll explore the protocol structure and transport mechanisms used in MCP.
 
-<Tip warning={true}>
-
-We're getting down to the nitty-gritty details of the MCP protocol. You won't need to know all of this to build with MCP, but it's good to know that it exists and how it works.
-
-</Tip>
+> [!WARNING]
+> We're getting down to the nitty-gritty details of the MCP protocol. You won't need to know all of this to build with MCP, but it's good to know that it exists and how it works.
 
 ## JSON-RPC: The Foundation
 
@@ -99,11 +96,8 @@ The stdio transport is used for local communication, where the Client and Server
 
 The Host application launches the Server as a subprocess and communicates with it by writing to its standard input (stdin) and reading from its standard output (stdout).
 
-<Tip>
-
-**Use cases** for this transport are local tools like file system access or running local scripts.
-
-</Tip>
+> [!TIP]
+> **Use cases** for this transport are local tools like file system access or running local scripts.
 
 The main **Advantages** of this transport are that it's simple, no network configuration required, and securely sandboxed by the operating system.
 
@@ -113,11 +107,8 @@ The HTTP+SSE transport is used for remote communication, where the Client and Se
 
 Communication happens over HTTP, with the Server using Server-Sent Events (SSE) to push updates to the Client over a persistent connection.
 
-<Tip>
-
-**Use cases** for this transport are connecting to remote APIs, cloud services, or shared resources.
-
-</Tip>
+> [!TIP]
+> **Use cases** for this transport are connecting to remote APIs, cloud services, or shared resources.
 
 The main **Advantages** of this transport are that it works across networks, enables integration with web services, and is compatible with serverless environments.
 

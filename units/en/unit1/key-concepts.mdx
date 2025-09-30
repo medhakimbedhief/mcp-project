@@ -35,13 +35,10 @@ MCP transforms this into an M+N problem by providing a standard interface: each 
 
 Now that we understand the problem that MCP solves, let's dive into the core terminology and concepts that make up the MCP protocol.
 
-<Tip>
-
-MCP is a standard like HTTP or USB-C, and is a protocol for connecting AI applications to external tools and data sources. Therefore, using standard terminology is crucial to making the MCP work effectively. 
-
-When documenting our applications and communicating with the community, we should use the following terminology.
-
-</Tip>
+> [!TIP]
+> MCP is a standard like HTTP or USB-C, and is a protocol for connecting AI applications to external tools and data sources. Therefore, using standard terminology is crucial to making the MCP work effectively. 
+>
+> When documenting our applications and communicating with the community, we should use the following terminology.
 
 ### Components
 
@@ -55,11 +52,8 @@ Just like client server relationships in HTTP, MCP has a client and a server.
 
 - **Server**: An external program or service that exposes capabilities (Tools, Resources, Prompts) via the MCP protocol.
 
-<Tip warning={true}>
-
-A lot of content uses 'Client' and 'Host' interchangeably. Technically speaking, the host is the user-facing application, and the client is the component within the host application that manages communication with a specific MCP Server.
-
-</Tip>
+> [!WARNING]
+> A lot of content uses 'Client' and 'Host' interchangeably. Technically speaking, the host is the user-facing application, and the client is the component within the host application that manages communication with a specific MCP Server.
 
 ### Capabilities
 

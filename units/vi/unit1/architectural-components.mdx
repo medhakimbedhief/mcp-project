@@ -48,11 +48,8 @@ Thông thường, người dùng sẽ chọn ứng dụng Host dựa trên nhu c
 
 Cùng xem cách các thành phần tương tác trong quy trình MCP điển hình:
 
-<Tip>
-
-Trong phần tiếp theo, chúng ta sẽ khám phá sâu hơn về giao thức giao tiếp với các ví dụ thực tế.
-
-</Tip>
+> [!TIP]
+> Trong phần tiếp theo, chúng ta sẽ khám phá sâu hơn về giao thức giao tiếp với các ví dụ thực tế.
 
 1. **Tương tác người dùng**: Người dùng tương tác với ứng dụng **Host**, thể hiện nhu cầu hoặc truy vấn.
 
@@ -70,11 +67,8 @@ Trong phần tiếp theo, chúng ta sẽ khám phá sâu hơn về giao thức g
 
 Ưu điểm chính của kiến trúc này là tính mô-đun. Một Host duy nhất có thể kết nối với nhiều Server cùng lúc thông qua các Client khác nhau. Có thể thêm Server mới vào hệ sinh thái mà không cần thay đổi Host hiện có. Có thể dễ dàng kết hợp các khả năng trên nhiều Server khác nhau.
 
-<Tip>
-
-Như đã thảo luận ở phần trước, tính mô-đun này biến bài toán tích hợp M×N truyền thống (khi M ứng dụng AI kết nối với N công cụ/dịch vụ) thành một bài toán M+N dễ quản lý hơn - nơi mỗi Host và Server chỉ cần triển khai chuẩn MCP một lần.
-
-</Tip>
+> [!TIP]
+> Như đã thảo luận ở phần trước, tính mô-đun này biến bài toán tích hợp M×N truyền thống (khi M ứng dụng AI kết nối với N công cụ/dịch vụ) thành một bài toán M+N dễ quản lý hơn - nơi mỗi Host và Server chỉ cần triển khai chuẩn MCP một lần.
 
 Kiến trúc này trông có vẻ đơn giản, nhưng sức mạnh thực sự nằm ở việc chuẩn hóa giao thức truyền thông và sự phân tách rõ ràng trách nhiệm giữa các thành phần. Thiết kế này cho phép tạo ra một hệ sinh thái gắn kết nơi các mô hình AI có thể kết nối liền mạch với một mảng các công cụ và nguồn dữ liệu bên ngoài ngày càng phát triển.
 

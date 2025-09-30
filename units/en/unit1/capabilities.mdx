@@ -2,13 +2,10 @@
 
 MCP Servers expose a variety of capabilities to Clients through the communication protocol. These capabilities fall into four main categories, each with distinct characteristics and use cases. Let's explore these core primitives that form the foundation of MCP's functionality.
 
-<Tip>
-
-In this section, we'll show examples as framework agnostic functions in each language. This is to focus on the concepts and how they work together, rather than the complexities of any framework.
-
-In the coming units, we'll show how these concepts are implemented in MCP specific code.
-
-</Tip>
+> [!TIP]
+> In this section, we'll show examples as framework agnostic functions in each language. This is to focus on the concepts and how they work together, rather than the complexities of any framework.
+>
+> In the coming units, we'll show how these concepts are implemented in MCP specific code.
 
 ## Tools
 
@@ -200,11 +197,8 @@ The sampling flow follows these steps:
 4. Client reviews the completion
 5. Client returns the result to the server
 
-<Tip>
-
-This human-in-the-loop design ensures users maintain control over what the LLM sees and generates. When implementing sampling, it's important to provide clear, well-structured prompts and include relevant context.
-
-</Tip>
+> [!TIP]
+> This human-in-the-loop design ensures users maintain control over what the LLM sees and generates. When implementing sampling, it's important to provide clear, well-structured prompts and include relevant context.
 
 ## How Capabilities Work Together
 

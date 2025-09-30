@@ -2,11 +2,8 @@
 
 MCP định nghĩa một giao thức truyền thông chuẩn hóa cho phép Client và Server trao đổi thông điệp một cách nhất quán, dễ dự đoán. Sự chuẩn hóa này rất quan trọng để đảm bảo khả năng tương tác trong cộng đồng. Trong phần này, chúng ta sẽ khám phá cấu trúc giao thức và cơ chế vận chuyển được sử dụng trong MCP.
 
-<Tip warning={true}>
-
-Chúng ta đang đi sâu vào những chi tiết phức tạp của giao thức MCP (nguyên văn: "nitty-gritty" - chỉ những chi tiết quan trọng và phức tạp). Bạn không cần biết tất cả những điều này để xây dựng với MCP, nhưng nên biết về sự tồn tại và cách hoạt động của nó.
-
-</Tip>
+> [!WARNING]
+> Chúng ta đang đi sâu vào những chi tiết phức tạp của giao thức MCP (nguyên văn: "nitty-gritty" - chỉ những chi tiết quan trọng và phức tạp). Bạn không cần biết tất cả những điều này để xây dựng với MCP, nhưng nên biết về sự tồn tại và cách hoạt động của nó.
 
 ## JSON-RPC: Nền Tảng
 
@@ -99,11 +96,8 @@ Cơ chế stdio được dùng cho giao tiếp cục bộ, khi Client và Server
 
 Ứng dụng chủ khởi chạy Server như một tiến trình con và giao tiếp bằng cách ghi vào đầu vào chuẩn (stdin) và đọc từ đầu ra chuẩn (stdout).
 
-<Tip>
-
-**Trường hợp sử dụng** cho phương thức truyền tải này là các công cụ local như truy cập hệ thống file hoặc chạy script local.
-
-</Tip>
+> [!TIP]
+> **Trường hợp sử dụng** cho phương thức truyền tải này là các công cụ local như truy cập hệ thống file hoặc chạy script local.
 
 **Ưu điểm** chính của phương thức này là đơn giản, không yêu cầu cấu hình mạng và được hệ điều hành cách ly an toàn.
 
@@ -113,11 +107,8 @@ Phương thức HTTP + SSE được dùng cho giao tiếp từ xa khi Client và
 
 Giao tiếp diễn ra qua HTTP, với Server sử dụng Server-Sent Events (SSE) để đẩy các cập nhật tới Client qua kết nối liên tục.
 
-<Tip>
-
-**Trường hợp sử dụng** cho phương thức này là kết nối tới API từ xa, dịch vụ đám mây hoặc tài nguyên dùng chung.
-
-</Tip>
+> [!TIP]
+> **Trường hợp sử dụng** cho phương thức này là kết nối tới API từ xa, dịch vụ đám mây hoặc tài nguyên dùng chung.
 
 **Ưu điểm** chính là hoạt động được qua mạng, tích hợp được với dịch vụ web và tương thích với môi trường serverless.
 

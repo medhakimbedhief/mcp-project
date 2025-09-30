@@ -32,11 +32,8 @@ File cấu hình chuẩn cho MCP có tên `mcp.json`. Đây là cấu trúc cơ 
 
 Trong ví dụ này, chúng ta có một server được cấu hình sử dụng SSE transport, kết nối đến Gradio server local chạy trên cổng 7860.
 
-<Tip>
-
-Chúng ta đã kết nối đến ứng dụng Gradio qua giao thức SSE vì giả định rằng ứng dụng gradio đang chạy trên một Server từ xa. Tuy nhiên nếu bạn muốn kết nối đến script local, `stdio` transport thay vì `sse` transport là lựa chọn tốt hơn.
-
-</Tip>
+> [!TIP]
+> Chúng ta đã kết nối đến ứng dụng Gradio qua giao thức SSE vì giả định rằng ứng dụng gradio đang chạy trên một Server từ xa. Tuy nhiên nếu bạn muốn kết nối đến script local, `stdio` transport thay vì `sse` transport là lựa chọn tốt hơn.
 
 #### Cấu hình cho HTTP+SSE Transport
 
