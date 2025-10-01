@@ -12,13 +12,10 @@ In this section, you will:
 * Discover how to connect to the Hugging Face MCP Server and built-in tools
 * See practical examples of MCP Client usage
 
-<Tip>
-
-In this page we're going to show examples of how to set up MCP Clients in a few different ways using the JSON notation. For now, we will use *examples* like `path/to/server.py` to represent the path to the MCP Server. In the next unit, we'll implement this with real MCP Servers.  
-
-For now, focus on understanding the MCP Client notation. We'll implement the MCP Servers in the next unit.
-
-</Tip>
+> [!TIP]
+> In this page we're going to show examples of how to set up MCP Clients in a few different ways using the JSON notation. For now, we will use *examples* like `path/to/server.py` to represent the path to the MCP Server. In the next unit, we'll implement this with real MCP Servers.  
+>
+> For now, focus on understanding the MCP Client notation. We'll implement the MCP Servers in the next unit.
 
 ## Understanding MCP Clients
 
@@ -57,11 +54,8 @@ Now that we've covered the core of the MCP protocol, let's look at how to config
 
 Effective deployment of MCP servers and clients requires proper configuration. 
 
-<Tip>
-
-The MCP specification is still evolving, so the configuration methods are subject to evolution. We'll focus on the current best practices for configuration.
-
-</Tip>
+> [!TIP]
+> The MCP specification is still evolving, so the configuration methods are subject to evolution. We'll focus on the current best practices for configuration.
 
 ### MCP Configuration Files
 
@@ -274,11 +268,8 @@ huggingface-cli login
 
 After creating your Hugging Face access token and logging in, you need to ensure your token has the proper permissions to work with inference providers.
 
-<Tip warning={true}>
-
-**Important:** If you skip this step, you may encounter authentication errors when running tiny agents with hosted models.
-
-</Tip>
+> [!WARNING]
+> **Important:** If you skip this step, you may encounter authentication errors when running tiny agents with hosted models.
 
 1. Go to your [Hugging Face Access Tokens page](https://huggingface.co/settings/tokens)
 2. Find your MCP token and click the three dots (⋮) next to it

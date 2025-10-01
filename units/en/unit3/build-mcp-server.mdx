@@ -99,15 +99,13 @@ cd mcp-course/projects/unit3/build-mcp-server/starter
 
 Install dependencies:
 
-<Tip>
-
-You might want to create a virtual environment for this project:
-
-```bash
-uv venv .venv
-source .venv/bin/activate # On Windows use: .venv\Scripts\activate
-```
-</Tip>
+> [!TIP]
+> You might want to create a virtual environment for this project:
+>
+> ```bash
+> uv venv .venv
+> source .venv/bin/activate # On Windows use: .venv\Scripts\activate
+> ```
 
 ```bash
 uv sync --all-extras
@@ -136,11 +134,8 @@ Unlike traditional systems that categorize changes based on file extensions or r
 - Allow Claude to make intelligent template suggestions
 - Keep the logic simple - Claude handles the complexity
 
-<Tip>
-
-**MCP Philosophy**: Instead of building complex logic into your tools, provide Claude with rich data and let its intelligence make the decisions. This makes your code simpler and more flexible than traditional rule-based systems.
-
-</Tip>
+> [!TIP]
+> **MCP Philosophy**: Instead of building complex logic into your tools, provide Claude with rich data and let its intelligence make the decisions. This makes your code simpler and more flexible than traditional rule-based systems.
 
 ## Testing Your Implementation
 
@@ -177,11 +172,8 @@ Then:
 2. Ask Claude: "Can you analyze my changes and suggest a PR template?"
 3. Watch Claude use your tools to provide intelligent suggestions
 
-<Tip warning={true}>
-
-**Common first error**: If you get "MCP tool response exceeds maximum allowed tokens (25000)", this is expected! Large repositories can generate massive diffs. This is a valuable learning moment - see the "Handling Large Outputs" section for the solution.
-
-</Tip>
+> [!WARNING]
+> **Common first error**: If you get "MCP tool response exceeds maximum allowed tokens (25000)", this is expected! Large repositories can generate massive diffs. This is a valuable learning moment - see the "Handling Large Outputs" section for the solution.
 
 ## Common Patterns
 
@@ -213,19 +205,13 @@ except Exception as e:
     return json.dumps({"error": str(e)})
 ```
 
-<Tip warning={true}>
-
-**Error Handling**: Always return valid JSON from your tools, even for errors. Claude needs structured data to understand what went wrong and provide helpful responses to users.
-
-</Tip>
+> [!WARNING]
+> **Error Handling**: Always return valid JSON from your tools, even for errors. Claude needs structured data to understand what went wrong and provide helpful responses to users.
 
 ### Handling Large Outputs (Critical Learning Moment!)
 
-<Tip warning={true}>
-
-**Real-world constraint**: MCP tools have a token limit of 25,000 tokens per response. Large git diffs can easily exceed this limit 10x or more! This is a critical lesson for production MCP development.
-
-</Tip>
+> [!WARNING]
+> **Real-world constraint**: MCP tools have a token limit of 25,000 tokens per response. Large git diffs can easily exceed this limit 10x or more! This is a critical lesson for production MCP development.
 
 When implementing `analyze_file_changes`, you'll likely encounter this error:
 ```

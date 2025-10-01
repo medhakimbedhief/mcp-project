@@ -2,11 +2,8 @@
 
 In this section, we'll set up the development environment for our Pull Request Agent. 
 
-<Tip>
-
-We'll use modern Python tooling with `uv` for dependency management and create the necessary configuration files. If you're not familiar with `uv`, you can learn more about it [here](https://docs.astral.sh/uv/).
-
-</Tip>
+> [!TIP]
+> We'll use modern Python tooling with `uv` for dependency management and create the necessary configuration files. If you're not familiar with `uv`, you can learn more about it [here](https://docs.astral.sh/uv/).
 
 
 ## Project Structure
@@ -37,11 +34,8 @@ Let's walk through the dependencies and configuration for our project.
 
 We will use `uv` to create the `pyproject.toml` file to define our project:
 
-<Tip>
-
-If you don't have `uv` installed, you can follow the instructions [here](https://docs.astral.sh/uv/getting-started/installation/).
-
-</Tip>
+> [!TIP]
+> If you don't have `uv` installed, you can follow the instructions [here](https://docs.astral.sh/uv/getting-started/installation/).
 
 ```toml
 [project]
@@ -126,8 +120,5 @@ With our project structure and environment set up, we're ready to:
 
 In the next section, we'll dive into creating our MCP server that will handle all the Hugging Face Hub interactions.
 
-<Tip>
-
-Keep your `.env` file secure and never commit it to version control. The `.env` file should be added to your `.gitignore` file to prevent accidental exposure of secrets.
-
-</Tip> 
+> [!TIP]
+> Keep your `.env` file secure and never commit it to version control. The `.env` file should be added to your `.gitignore` file to prevent accidental exposure of secrets. 

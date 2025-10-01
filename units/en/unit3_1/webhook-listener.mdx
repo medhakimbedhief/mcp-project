@@ -19,11 +19,8 @@ Understanding the webhook flow is crucial for building a reliable listener:
 5. **Processing**: Extract tags from the comment content
 6. **Action**: Use MCP tools to create pull requests for new tags
 
-<Tip>
-
-Webhooks are push notifications - the Hugging Face Hub actively sends events to your application rather than you polling for changes. This enables real-time responses to discussions and comments.
-
-</Tip>
+> [!TIP]
+> Webhooks are push notifications - the Hugging Face Hub actively sends events to your application rather than you polling for changes. This enables real-time responses to discussions and comments.
 
 ## FastAPI Webhook Application
 
@@ -66,9 +63,8 @@ This configuration sets up:
 - **Operations store**: In-memory storage for monitoring processed operations
 - **CORS middleware**: Allows cross-origin requests for the web interface
 
-<Tip>
-The `tag_operations_store` list keeps track of recent webhook processing operations. This is useful for debugging and monitoring, but in production you might want to use a database or limit the size of this list.
-</Tip>
+> [!TIP]
+> The `tag_operations_store` list keeps track of recent webhook processing operations. This is useful for debugging and monitoring, but in production you might want to use a database or limit the size of this list.
 
 ### 2. Webhook Data Models
 
@@ -112,11 +108,8 @@ async def webhook_handler(request: Request, background_tasks: BackgroundTasks):
 
 The first step is security validation. We check the `X-Webhook-Secret` header against our configured secret to ensure the webhook is legitimate.
 
-<Tip>
-
-Always validate webhook secrets! Without this check, anyone could send fake webhook requests to your application. The secret acts as a shared password between Hugging Face and your application.
-
-</Tip>
+> [!TIP]
+> Always validate webhook secrets! Without this check, anyone could send fake webhook requests to your application. The secret acts as a shared password between Hugging Face and your application.
 
 Next, let's parse and validate the webhook data:
 
@@ -169,11 +162,8 @@ This filtering ensures we only process the events we care about - new discussion
 
 We use FastAPI's `background_tasks.add_task()` to process the webhook asynchronously. This allows us to return a response quickly (within seconds) while the actual tag processing happens in the background.
 
-<Tip>
-
-Webhook endpoints should respond within 10 seconds, or the sending platform may consider them failed. Using background tasks ensures fast responses while allowing complex processing to happen asynchronously.
-
-</Tip>
+> [!TIP]
+> Webhook endpoints should respond within 10 seconds, or the sending platform may consider them failed. Using background tasks ensures fast responses while allowing complex processing to happen asynchronously.
 
 ### 4. Comment Processing Logic
 
@@ -227,11 +217,8 @@ Next, we extract and process the tags:
 
 We combine tags from both sources and create an operation record for monitoring. This record tracks the progress of each webhook processing operation.
 
-<Tip>
-
-Storing operation records is crucial for debugging and monitoring. When something goes wrong, you can look at recent operations to understand what happened and why.
-
-</Tip>
+> [!TIP]
+> Storing operation records is crucial for debugging and monitoring. When something goes wrong, you can look at recent operations to understand what happened and why.
 
 Now for the MCP agent integration:
 
@@ -357,11 +344,8 @@ async def get_operations():
 
 The operations endpoint lets you see recent webhook processing activity, which is invaluable for debugging and monitoring.
 
-<Tip>
-
-Health and monitoring endpoints are crucial for production deployments. They help you quickly identify configuration issues and monitor your application's activity without digging through logs.
-
-</Tip>
+> [!TIP]
+> Health and monitoring endpoints are crucial for production deployments. They help you quickly identify configuration issues and monitor your application's activity without digging through logs.
 
 ## Webhook Configuration on Hugging Face Hub
 
@@ -380,11 +364,8 @@ Navigate to your [Hugging Face Settings](https://huggingface.co/settings/webhook
 3. **Secret**: Use the same secret from your `WEBHOOK_SECRET` environment variable
 4. **Events**: Subscribe to "Community (PR & discussions)" events
 
-<Tip>
-
-Start with one or two test repositories before configuring webhooks for many repositories. This lets you validate your application works correctly before scaling up.
-
-</Tip>
+> [!TIP]
+> Start with one or two test repositories before configuring webhooks for many repositories. This lets you validate your application works correctly before scaling up.
 
 ### 2. Space URL Configuration
 
@@ -487,9 +468,8 @@ async def simulate_webhook(
 
 This endpoint makes it easy to test different scenarios through your application's interface.
 
-<Tip>
-Simulation endpoints are incredibly useful during development. They let you test different tag combinations and edge cases without creating actual repository discussions.
-</Tip>
+> [!TIP]
+> Simulation endpoints are incredibly useful during development. They let you test different tag combinations and edge cases without creating actual repository discussions.
 
 ## Expected Webhook Result
 
@@ -512,8 +492,5 @@ With our webhook listener implemented, we now have:
 
 In the next section, we'll integrate everything into a complete Pull Request Agent that demonstrates the full workflow from webhook to PR creation.
 
-<Tip>
-
-Always return webhook responses quickly (within 10 seconds) to avoid timeouts. Use background tasks for longer processing operations like MCP tool execution and pull request creation.
-
-</Tip>
+> [!TIP]
+> Always return webhook responses quickly (within 10 seconds) to avoid timeouts. Use background tasks for longer processing operations like MCP tool execution and pull request creation.

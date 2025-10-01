@@ -48,11 +48,8 @@ The **Server** is an external program or service that exposes capabilities to AI
 
 Let's examine how these components interact in a typical MCP workflow:
 
-<Tip>
-
-In the next section, we'll dive deeper into the communication protocol that enables these components with practical examples.
-
-</Tip>
+> [!TIP]
+> In the next section, we'll dive deeper into the communication protocol that enables these components with practical examples.
 
 1. **User Interaction**: The user interacts with the **Host** application, expressing an intent or query.
 
@@ -70,11 +67,8 @@ In the next section, we'll dive deeper into the communication protocol that enab
 
 A key advantage of this architecture is its modularity. A single **Host** can connect to multiple **Servers** simultaneously via different **Clients**. New **Servers** can be added to the ecosystem without requiring changes to existing **Hosts**. Capabilities can be easily composed across different **Servers**.
 
-<Tip>
-
-As we discussed in the previous section, this modularity transforms the traditional M×N integration problem (M AI applications connecting to N tools/services) into a more manageable M+N problem, where each Host and Server needs to implement the MCP standard only once.
-
-</Tip>
+> [!TIP]
+> As we discussed in the previous section, this modularity transforms the traditional M×N integration problem (M AI applications connecting to N tools/services) into a more manageable M+N problem, where each Host and Server needs to implement the MCP standard only once.
 
 The architecture might appear simple, but its power lies in the standardization of the communication protocol and the clear separation of responsibilities between components. This design allows for a cohesive ecosystem where AI models can seamlessly connect with an ever-growing array of external tools and data sources.
 

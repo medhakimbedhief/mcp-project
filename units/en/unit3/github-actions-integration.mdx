@@ -77,11 +77,8 @@ Your MCP server will run two services:
 
 This allows Claude to react to real-time CI/CD events!
 
-<Tip>
-
-**Architecture Insight**: Running separate services for MCP communication and webhook handling is a clean separation of concerns. The webhook server handles HTTP complexity while your MCP server focuses on data analysis and Claude integration.
-
-</Tip>
+> [!TIP]
+> **Architecture Insight**: Running separate services for MCP communication and webhook handling is a clean separation of concerns. The webhook server handles HTTP complexity while your MCP server focuses on data analysis and Claude integration.
 
 ## Project Structure
 
@@ -136,21 +133,15 @@ EVENTS_FILE = Path(__file__).parent / "github_events.json"
 
 The webhook server handles all the HTTP details - you just need to read the JSON file! This separation of concerns keeps your MCP server focused on what it does best.
 
-<Tip>
-
-**Development Tip**: Working with files instead of HTTP requests makes testing much easier. You can manually add events to `github_events.json` to test your tools without setting up webhooks.
-
-</Tip>
+> [!TIP]
+> **Development Tip**: Working with files instead of HTTP requests makes testing much easier. You can manually add events to `github_events.json` to test your tools without setting up webhooks.
 
 ### Step 3: Add GitHub Actions Tools
 
 Just like in Module 1 where you created tools for file analysis, you'll now create tools for CI/CD analysis. These tools will work alongside your existing PR analysis tools, giving Claude a complete view of both code changes and build status.
 
-<Tip>
-
-**Note**: The starter code already includes the output limiting fix from Module 1, so you won't encounter token limit errors. Focus on the new concepts in this module!
-
-</Tip>
+> [!TIP]
+> **Note**: The starter code already includes the output limiting fix from Module 1, so you won't encounter token limit errors. Focus on the new concepts in this module!
 
 Implement two new tools:
 
