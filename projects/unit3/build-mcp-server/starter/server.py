@@ -213,10 +213,10 @@ async def suggest_template(changes_summary: str, change_type: str) -> str:
 
     except Exception as e:
         suggestion = {
-            "recommended_template": "recommended_template",
-            "reasoning": f"Based on your analysis: changes_summary, this appears to be a change_type change.",
-            "template_content": "template_content",
-            "suggestion": "Claude can help you fill out this template based on the specific changes in your PR."
+            "recommended_template": f"recommended_template {e}",
+            "reasoning": f"Based on your analysis: changes_summary, this appears to be a {e} change.",
+            "template_content": f"template_content {e}",
+            "suggestion": f"Claude can help you fill out this template based on the specific changes in your PR. {e}"
         }
         return json.dumps(suggestion, indent=2)
 
