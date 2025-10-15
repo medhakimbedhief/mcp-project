@@ -116,7 +116,7 @@ async def analyze_file_changes(base_branch: str = "main", max_diff_lines: int = 
             cwd=cwd
         )
         stat_stdout, stat_stderr = stat_result.communicate()
-        if stat_stdout.returncode != 0:
+        if stat_result.returncode != 0:
             raise subprocess.CalledProcessError(
                 stat_result.returncode, stat_result.args, output=stat_stdout, stderr=stat_stderr)
         # Get the actual diff if requested
