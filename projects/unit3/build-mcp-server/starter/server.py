@@ -108,13 +108,17 @@ async def analyze_file_changes(base_branch: str = "main", max_diff_lines: int = 
         )
 
         # Get diff statistics
-        stat_result = subprocess.run(
+        stat_result = subprocess.Popen(
             ["git", "diff", "--stat", f"{base_branch}...HEAD"],
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
             cwd=cwd
         )
-
+        stat_stdout, stat_stderr = stat_result.communicate()
+        if stat_result.returncode != 0:
+            raise subprocess.CalledProcessError(
+                stat_result.returncode, stat_result.args, output=stat_stdout, stderr=stat_stderr)
         # Get the actual diff if requested
         diff_content = ""
         truncated = False
@@ -147,7 +151,7 @@ async def analyze_file_changes(base_branch: str = "main", max_diff_lines: int = 
         analysis = {
             "base_branch": base_branch,
             "files_changed": files_result.stdout,
-            "statistics": stat_result.stdout,
+            "statistics": stat_stdout,
             "commits": commits_result.stdout,
             "diff": diff_content if include_diff else "Diff not included (set include_diff=true to see full diff)",
             "truncated": truncated,
@@ -213,10 +217,10 @@ async def suggest_template(changes_summary: str, change_type: str) -> str:
 
     except Exception as e:
         suggestion = {
-            "recommended_template": "recommended_template",
-            "reasoning": f"Based on your analysis: changes_summary, this appears to be a change_type change.",
-            "template_content": "template_content",
-            "suggestion": "Claude can help you fill out this template based on the specific changes in your PR."
+            "recommended_template": f"recommended_template {e}",
+            "reasoning": f"Based on your analysis: changes_summary, this appears to be a {e} change.",
+            "template_content": f"template_content {e}",
+            "suggestion": f"Claude can help you fill out this template based on the specific changes in your PR. {e}"
         }
         return json.dumps(suggestion, indent=2)
 
