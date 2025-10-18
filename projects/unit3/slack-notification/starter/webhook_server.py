@@ -51,9 +51,10 @@ async def handle_webhook(request):
 
         # Load existing events
         events = []
-        if EVENTS_FILE.exists() and EVENTS_FILE.stat().st_size > 0:
+        if EVENTS_FILE.exists() and EVENTS_FILE.stat().st_size > 0 and event['action'] == "completed":
             try:
                 with open(EVENTS_FILE, 'r') as f:
+                    print(f"ℹ️  Loading existing events from {EVENTS_FILE}")
                     events = json.load(f)
             except json.JSONDecodeError:
                 print(f"⚠️  Events file was corrupted, starting fresh")
@@ -67,6 +68,8 @@ async def handle_webhook(request):
 
         # Save events
         with open(EVENTS_FILE, 'w') as f:
+            if "completed" in event:
+                print(f"ℹ️  Saving events to {EVENTS_FILE}")
             json.dump(events, f, indent=2)
 
         return web.json_response({"status": "received"})
