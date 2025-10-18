@@ -9,6 +9,7 @@ import os
 import subprocess
 from typing import Optional
 from pathlib import Path
+import requests
 
 from mcp.server.fastmcp import FastMCP
 
@@ -49,8 +50,8 @@ TYPE_MAPPING = {
     "security": "security.md"
 }
 
-
 # ===== Tools from Modules 1 & 2 (Complete with output limiting) =====
+
 
 @mcp.tool()
 async def analyze_file_changes(
@@ -59,7 +60,7 @@ async def analyze_file_changes(
     max_diff_lines: int = 500
 ) -> str:
     """Get the full diff and list of changed files in the current git repository.
-    
+
     Args:
         base_branch: Base branch to compare against (default: main)
         include_diff: Include the full diff content (default: true)
@@ -73,14 +74,14 @@ async def analyze_file_changes(
             text=True,
             check=True
         )
-        
+
         # Get diff statistics
         stat_result = subprocess.run(
             ["git", "diff", "--stat", f"{base_branch}...HEAD"],
             capture_output=True,
             text=True
         )
-        
+
         # Get the actual diff if requested
         diff_content = ""
         truncated = False
@@ -91,7 +92,7 @@ async def analyze_file_changes(
                 text=True
             )
             diff_lines = diff_result.stdout.split('\n')
-            
+
             # Check if we need to truncate
             if len(diff_lines) > max_diff_lines:
                 diff_content = '\n'.join(diff_lines[:max_diff_lines])
@@ -100,14 +101,14 @@ async def analyze_file_changes(
                 truncated = True
             else:
                 diff_content = diff_result.stdout
-        
+
         # Get commit messages for context
         commits_result = subprocess.run(
             ["git", "log", "--oneline", f"{base_branch}..HEAD"],
             capture_output=True,
             text=True
         )
-        
+
         analysis = {
             "base_branch": base_branch,
             "files_changed": files_result.stdout,
@@ -117,9 +118,9 @@ async def analyze_file_changes(
             "truncated": truncated,
             "total_diff_lines": len(diff_lines) if include_diff else 0
         }
-        
+
         return json.dumps(analysis, indent=2)
-        
+
     except subprocess.CalledProcessError as e:
         return json.dumps({"error": f"Git error: {e.stderr}"})
     except Exception as e:
@@ -137,54 +138,54 @@ async def get_pr_templates() -> str:
         }
         for filename, template_type in DEFAULT_TEMPLATES.items()
     ]
-    
+
     return json.dumps(templates, indent=2)
 
 
 @mcp.tool()
 async def suggest_template(changes_summary: str, change_type: str) -> str:
     """Let Claude analyze the changes and suggest the most appropriate PR template.
-    
+
     Args:
         changes_summary: Your analysis of what the changes do
         change_type: The type of change you've identified (bug, feature, docs, refactor, test, etc.)
     """
-    
+
     # Get available templates
     templates_response = await get_pr_templates()
     templates = json.loads(templates_response)
-    
+
     # Find matching template
     template_file = TYPE_MAPPING.get(change_type.lower(), "feature.md")
     selected_template = next(
         (t for t in templates if t["filename"] == template_file),
         templates[0]  # Default to first template if no match
     )
-    
+
     suggestion = {
         "recommended_template": selected_template,
         "reasoning": f"Based on your analysis: '{changes_summary}', this appears to be a {change_type} change.",
         "template_content": selected_template["content"],
         "usage_hint": "Claude can help you fill out this template based on the specific changes in your PR."
     }
-    
+
     return json.dumps(suggestion, indent=2)
 
 
 @mcp.tool()
 async def get_recent_actions_events(limit: int = 10) -> str:
     """Get recent GitHub Actions events received via webhook.
-    
+
     Args:
         limit: Maximum number of events to return (default: 10)
     """
     # Read events from file
     if not EVENTS_FILE.exists():
         return json.dumps([])
-    
+
     with open(EVENTS_FILE, 'r') as f:
         events = json.load(f)
-    
+
     # Return most recent events
     recent = events[-limit:]
     return json.dumps(recent, indent=2)
@@ -193,32 +194,32 @@ async def get_recent_actions_events(limit: int = 10) -> str:
 @mcp.tool()
 async def get_workflow_status(workflow_name: Optional[str] = None) -> str:
     """Get the current status of GitHub Actions workflows.
-    
+
     Args:
         workflow_name: Optional specific workflow name to filter by
     """
     # Read events from file
     if not EVENTS_FILE.exists():
         return json.dumps({"message": "No GitHub Actions events received yet"})
-    
+
     with open(EVENTS_FILE, 'r') as f:
         events = json.load(f)
-    
+
     if not events:
         return json.dumps({"message": "No GitHub Actions events received yet"})
-    
+
     # Filter for workflow events
     workflow_events = [
-        e for e in events 
+        e for e in events
         if e.get("workflow_run") is not None
     ]
-    
+
     if workflow_name:
         workflow_events = [
             e for e in workflow_events
             if e["workflow_run"].get("name") == workflow_name
         ]
-    
+
     # Group by workflow and get latest status
     workflows = {}
     for event in workflow_events:
@@ -233,7 +234,7 @@ async def get_workflow_status(workflow_name: Optional[str] = None) -> str:
                 "updated_at": run["updated_at"],
                 "html_url": run["html_url"]
             }
-    
+
     return json.dumps(list(workflows.values()), indent=2)
 
 
@@ -242,23 +243,27 @@ async def get_workflow_status(workflow_name: Optional[str] = None) -> str:
 @mcp.tool()
 async def send_slack_notification(message: str) -> str:
     """Send a formatted notification to the team Slack channel.
-    
+
     Args:
         message: The message to send to Slack (supports Slack markdown)
     """
     webhook_url = os.getenv("SLACK_WEBHOOK_URL")
     if not webhook_url:
         return "Error: SLACK_WEBHOOK_URL environment variable not set"
-    
+
     try:
+        responce = requests.post(
+            webhook_url,
+            json={"text": message})
+        if responce.status_code == 200:
+            return "Message sent successfully to Slack"
+        else:
+            return f"Error sending message to Slack: {responce.status_code} - {responce.text}"
         # TODO: Import requests library
         # TODO: Send POST request to webhook_url with JSON payload
         # TODO: Include the message in the JSON data
         # TODO: Handle the response and return appropriate status
-        
-        # For now, return a placeholder
-        return f"TODO: Implement Slack webhook POST request for message: {message[:50]}..."
-        
+
     except Exception as e:
         return f"Error sending message: {str(e)}"
 
@@ -319,7 +324,7 @@ Examples:
 
 Other Slack formats:
 - *text* for bold (NOT **text**)
-- `text` for code
+- `text` for codev-
 - > text for quotes
 - • for bullets"""
 
