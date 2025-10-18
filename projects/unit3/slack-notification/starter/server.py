@@ -259,13 +259,8 @@ async def send_slack_notification(message: str) -> str:
             return "Message sent successfully to Slack"
         else:
             return f"Error sending message to Slack: {responce.status_code} - {responce.text}"
-        # TODO: Import requests library
-        # TODO: Send POST request to webhook_url with JSON payload
-        # TODO: Include the message in the JSON data
-        # TODO: Handle the response and return appropriate status
-
     except Exception as e:
-        return f"Error sending message: {str(e)}"
+        return f"Error sending message code [{responce.status_code}]:  {str(e)}"
 
 
 # ===== New Module 3: Slack Formatting Prompts =====
