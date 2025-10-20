@@ -88,5 +88,5 @@ app.router.add_post('/webhook/github', handle_webhook)
 if __name__ == '__main__':
     print("🚀 Starting webhook server on http://localhost:8080")
     print("📝 Events will be saved to:", EVENTS_FILE)
-    print("🔗 Webhook URL: https://terrain-open-cricket-interface.trycloudflare.com")
+    print("🔗 Webhook URL: https://upload-hottest-forge-swap.trycloudflare.com")
     web.run_app(app, host='localhost', port=8080)
